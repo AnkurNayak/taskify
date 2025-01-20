@@ -4,18 +4,24 @@ import { Toggle } from "@/components/ui/toggle";
 import { GoMoon, GoSun } from "react-icons/go";
 
 const ThemeSwitcher: React.FC = () => {
-  // const [isDark, setIsDark] = useState<boolean>(
-  //   JSON.parse(localStorage.getItem("isDark") || "false")
-  // );
-  const [isDark, setIsDark] = useState<boolean>(false);
+  const [isDark, setIsDark] = useState<boolean>(() =>
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("isDark") || "false")
+      : false
+  );
+  // const [isDark, setIsDark] = useState<boolean>(false);
 
   useEffect(() => {
     if (isDark) {
       document.body.classList.add("dark");
-      // localStorage.setItem("isDark", "true");
+      if (typeof window !== "undefined") {
+        localStorage.setItem("isDark", "true");
+      }
     } else {
       document.body.classList.remove("dark");
-      // localStorage.setItem("isDark", "false");
+      if (typeof window !== "undefined") {
+        localStorage.setItem("isDark", "false");
+      }
     }
   }, [isDark]);
 
