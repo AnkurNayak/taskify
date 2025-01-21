@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 
 const BaseLayoutPage: React.FC = () => {
   const { status } = useSession();
-  console.log(status);
   if (status === "loading") {
     return <div>Loading...</div>;
   }
