@@ -15,8 +15,10 @@ import {
 import FormField, { FormData } from "@/components/FormFields";
 import { AppDispatch } from "@/features/store";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useToast } from "@/hooks/use-toast";
 import { FcFullTrash } from "react-icons/fc";
+// import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/hooks/use-toast";
+// import { ToastAction } from "@/components/ui/toast";
 
 export interface Task {
   id: string;
@@ -64,6 +66,8 @@ const TaskManager = () => {
     setIsNewTask(false);
     toast({
       title: "New task added",
+      // description: Date.now(),
+      // action: <ToastAction altText="Goto schedule to undo">Close</ToastAction>,
     });
   });
 
@@ -145,12 +149,18 @@ interface TaskInfoProps {
 }
 
 const TaskInfo: React.FC<TaskInfoProps> = ({ task, dispatch }) => {
+  const { toast } = useToast();
   const handleTaskCheck = () => {
     dispatch(toggleTaskCompletion(task.id));
   };
 
   const handleDeleteTask = () => {
     dispatch(deleteTask(task.id));
+    toast({
+      title: "Task Deleted",
+      // description: Date.now(),
+      // action: <ToastAction altText="Goto schedule to undo">Close</ToastAction>,
+    });
   };
 
   const formatter = new Intl.DateTimeFormat("en-US", {
