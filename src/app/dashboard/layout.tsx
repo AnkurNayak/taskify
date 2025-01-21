@@ -6,8 +6,16 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export default function Page({ children }: { children: React.ReactNode }) {
+  const { status } = useSession();
+
+  if (status === "loading") return <div>Loading...</div>;
+
+  if (status === "unauthenticated") return redirect("/login");
+
   return (
     <SidebarProvider>
       <AppSidebar />
