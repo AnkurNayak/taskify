@@ -44,6 +44,7 @@ const TaskManager = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormData>({ resolver: zodResolver(taskSchema) });
   const dispatch = useDispatch();
   const tasks = useSelector((state: TaskRootState) => state.tasks.tasks);
@@ -56,6 +57,7 @@ const TaskManager = () => {
       completed: false,
     };
     dispatch(addTask(newTask));
+    reset();
     setIsNewTask(false);
   });
 

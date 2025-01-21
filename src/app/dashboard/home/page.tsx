@@ -20,7 +20,7 @@ const HomePage = () => {
               />
             </div>
             <div className="flex flex-col min-w-0 ml-4">
-              <div className="text-2xl lg:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+              <div className="text-2xl lg:text-5xl font-semibold tracking-tight truncate">
                 Welcome Back, {session?.user?.name}
               </div>
             </div>
