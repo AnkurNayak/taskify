@@ -15,6 +15,15 @@ import {
 import { Badge } from "@/components/ui/badge";
 import FormField, { FormData } from "@/components/FormFields";
 import { AppDispatch } from "@/features/store";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useToast } from "@/hooks/use-toast";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu";
+import { FcFullTrash } from "react-icons/fc";
 
 export interface Task {
   id: string;
@@ -39,6 +48,7 @@ const taskSchema = z.object({
 
 const TaskManager = () => {
   const [isNewTask, setIsNewTask] = useState<boolean>(false);
+  const { toast } = useToast();
 
   const {
     register,
@@ -59,6 +69,9 @@ const TaskManager = () => {
     dispatch(addTask(newTask));
     reset();
     setIsNewTask(false);
+    toast({
+      title: "New task added",
+    });
   });
 
   const handleNewTask = () => setIsNewTask((pv) => !pv);
@@ -79,7 +92,7 @@ const TaskManager = () => {
         </div>
       </div>
 
-      <div className="divide-y px-4">
+      <div className="p-4 space-y-2">
         {tasks.map((task) => (
           <TaskInfo key={task.id} task={task} dispatch={dispatch} />
         ))}
@@ -160,8 +173,31 @@ const TaskInfo: React.FC<TaskInfoProps> = ({ task, dispatch }) => {
   });
 
   return (
-    <div className="relative flex items-start py-4">
-      <button onClick={handleTaskCheck} className="flex items-center">
+    <div className="relative flex items-start p-2 gap-2 flex-col sm:flex-row bg-sidebar rounded-md">
+      <div className="items-top flex space-x-2">
+        <Checkbox
+          id="terms1"
+          onClick={handleTaskCheck}
+          checked={task.completed}
+        />
+        <div className="grid gap-1.5 leading-none">
+          <label
+            htmlFor="terms1"
+            className="truncate text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            {task.title}
+          </label>
+          <p className="text-sm text-muted-foreground">{task.description}</p>
+        </div>
+      </div>
+      <div className="flex items-center text-sm ml-6 sm:ml-auto gap-2">
+        <div>{formatter.format(Number(task.id))}</div>
+        <div onClick={handleDeleteTask} className="cursor-pointer">
+          <FcFullTrash size={20} />
+        </div>
+      </div>
+
+      {/* <button onClick={handleTaskCheck} className="flex items-center">
         <IoCheckmarkCircle
           size={24}
           className={task.completed ? "text-green-500" : "text-gray-500"}
@@ -179,7 +215,7 @@ const TaskInfo: React.FC<TaskInfoProps> = ({ task, dispatch }) => {
         >
           Delete Task
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

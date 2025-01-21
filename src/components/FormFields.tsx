@@ -36,14 +36,14 @@ const FormField: React.FC<FormFieldProps> = ({
           type={type}
           // placeholder={placeholder}
           {...register(name, { valueAsNumber })}
-          className="my-3 w-full outline-none bg-transparent"
+          className="my-2 w-full outline-none bg-transparent"
         />
       ) : inputType === "textarea" ? (
         <textarea
           //   type={type}
           // placeholder={placeholder}
           {...register(name, { valueAsNumber })}
-          className="my-3 w-full outline-none bg-transparent"
+          className="my-2 w-full outline-none bg-transparent"
         />
       ) : null}
     </div>
