@@ -9,7 +9,7 @@ export default function App({ children }: { children: ReactNode }) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <SessionProvider>{children}</SessionProvider>;
+        <SessionProvider>{children}</SessionProvider>
       </PersistGate>
     </Provider>
   );
