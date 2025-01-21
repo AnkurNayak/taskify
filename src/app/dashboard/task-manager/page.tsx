@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion, AnimatePresence, easeInOut } from "framer-motion";
-import { IoCheckmarkCircle, IoCloseOutline } from "react-icons/io5";
+import { IoCloseOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -12,17 +12,10 @@ import {
   deleteTask,
   toggleTaskCompletion,
 } from "@/features/slices/tasksSlice";
-import { Badge } from "@/components/ui/badge";
 import FormField, { FormData } from "@/components/FormFields";
 import { AppDispatch } from "@/features/store";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
 import { FcFullTrash } from "react-icons/fc";
 
 export interface Task {
@@ -196,26 +189,6 @@ const TaskInfo: React.FC<TaskInfoProps> = ({ task, dispatch }) => {
           <FcFullTrash size={20} />
         </div>
       </div>
-
-      {/* <button onClick={handleTaskCheck} className="flex items-center">
-        <IoCheckmarkCircle
-          size={24}
-          className={task.completed ? "text-green-500" : "text-gray-500"}
-        />
-      </button>
-      <div className="ml-4 w-full">
-        <div className="flex w-full justify-between">
-          <Badge>Created At : {formatter.format(Number(task.id))}</Badge>
-        </div>
-        <div className="font-semibold text-lg">{task.title}</div>
-        <div className="text-sm text-gray-500">{task.description}</div>
-        <Button
-          className="text-xs font-medium text-white bg-red-500 mt-2"
-          onClick={handleDeleteTask}
-        >
-          Delete Task
-        </Button>
-      </div> */}
     </div>
   );
 };
