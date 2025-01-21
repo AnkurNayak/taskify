@@ -33,9 +33,9 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    // async redirect({ baseUrl }) {
-    //   return baseUrl + "/dashboard/home";
-    // },
+    async redirect({ baseUrl }) {
+      return baseUrl + "/dashboard/home";
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
